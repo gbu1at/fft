@@ -1,17 +1,18 @@
-CXXFLAGS = -O2 -Wall -Wextra -Werror -std=c++17 -I../include
-SRCS = ../src/fft.cpp test.cpp
+CXXFLAGS = -O2 -Wall -Wextra -Werror -std=c++17 -Iinclude
+SRCS = fft.cpp main.cpp
 OBJS = $(notdir $(SRCS:.cpp=.o))
-VPATH = ../src:.
+VPATH = src:.
+EXE = main
 
-all: test
+all: $(EXE)
 
-test: $(OBJS)
+$(EXE): $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) test
+	rm -f $(OBJS) $(EXE)
 
 .PHONY: all clean

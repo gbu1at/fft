@@ -9,52 +9,22 @@ namespace fft {
 using vector_complex = std::vector<std::complex<double>>;
 
 
-vector_complex roots_of_minuse_one(size_t n) {
-    vector_complex roots;
-    const double pi = 3.14159265358979323846;
+vector_complex roots_of_one(size_t, bool=true);
 
-    for (size_t i = 0; i < n; ++i) {
-        double ang = pi * i / n;
-        roots.push_back(exp(std::complex<double>(0, ang)));
-    }
+vector_complex compute_fft_slow(const vector_complex&,bool=true);
 
-    return roots;
-}
+vector_complex forward_fft(const vector_complex&);
 
-vector_complex compute_easy_fft(
-    vector_complex _data
-) {
-    size_t n = _data.size();
-    vector_complex roots = roots_of_minuse_one(n);
+vector_complex backward_fft(const vector_complex&);
 
-    vector_complex result(n);
+vector_complex forward_fft_slow(const vector_complex&);
 
-    for (size_t i = 0; i < n; ++i)
-        for (size_t j = 0; j < n; ++j)
-            result[i] += roots[(i * j) % n] * _data[j];
- 
-    return result;
-}
+vector_complex backward_fft_slow(const vector_complex&);
 
-vector_complex forward_fft(
-    vector_complex _data
-);
-vector_complex backward_fft(
-    vector_complex _data
-);
+vector_complex compute_recursion_fft(const vector_complex&, size_t, size_t, bool=true);
 
+vector_complex compute_recursion_fft(const vector_complex&, bool=true);
 
-vector_complex compute_recursion_fft(
-    vector_complex _data,
-    size_t n1,
-    size_t n2
-) {
-    size_t n = _data.size();
-    if (n != n1 * n2)
-        throw std::runtime_error("error compute_recursion_fft arguments");
-
-    vector_complex roots = roots_of_minuse_one(n);
-
-}
+vector_complex normalized_backward_result(vector_complex&);
 
 }
