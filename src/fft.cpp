@@ -9,8 +9,6 @@ vector_complex compute_recursion_fft(const vector_complex& _data, bool is_forwar
     int p;
     int n = _data.size();
 
-    // std::cout << n << "\n";
-
     if (n == 2 || n == 3 || n == 5)
         return compute_fft_slow(_data, is_forward);
 
@@ -45,8 +43,11 @@ vector_complex compute_recursion_fft(const vector_complex& _data, size_t n1, siz
 
     for (size_t group = 0; group < n2; ++group) {
         vector_complex A(n1);
-        for (size_t i = 0; i < n1; ++i)
-            A[i] = compute_sep[i][group] * pow(roots[group], i);
+        std::complex<double> w = 1;
+        for (size_t i = 0; i < n1; ++i) {
+            A[i] = compute_sep[i][group] * w;
+            w *= roots[group];
+        }
         
         compute_group[group] = compute_recursion_fft(A, is_forward);
     }
@@ -65,6 +66,10 @@ vector_complex compute_fft_slow(
     bool is_forward
 ) {
     size_t n = _data.size();
+
+    if (n == 2)
+        return { _data[0] + _data[1], _data[0] - _data[1] };
+
     vector_complex roots;
     
     roots = roots_of_one(n, is_forward);

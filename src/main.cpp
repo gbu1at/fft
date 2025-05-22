@@ -5,6 +5,8 @@
 int main() {
     fft::vector_complex arr;
 
+    srand(time(0));
+    
     int n = 3000000;
 
     std::cout << "array size: " << n << '\n';
