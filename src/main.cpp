@@ -19,12 +19,12 @@ int main() {
     }
 
     clock_t time_start_forward_fft = clock();
-    fft::vector_complex fft_arr = fft::forward_fft(arr);
+    fft::vector_complex fft_arr = fft::ComputeFFT::forward_fft(arr);
     clock_t time_finish_forward_fft = clock();
 
 
     clock_t time_start_backward_fft = clock();
-    fft::vector_complex _arr = fft::backward_fft(fft_arr);
+    fft::vector_complex _arr = fft::ComputeFFT::backward_fft(fft_arr);
     clock_t time_finish_backward_fft = clock();
 
     double MAX_DEV = 0;

@@ -5,7 +5,7 @@ namespace fft
 {
 
 
-vector_complex compute_recursion_fft(const vector_complex& _data, bool is_forward) {
+vector_complex ComputeFFT::compute_recursion_fft(const vector_complex& _data, bool is_forward) {
     int p;
     int n = _data.size();
 
@@ -20,7 +20,7 @@ vector_complex compute_recursion_fft(const vector_complex& _data, bool is_forwar
     return compute_recursion_fft(_data, n / p, p, is_forward);
 }
 
-vector_complex compute_recursion_fft(const vector_complex& _data, size_t n1, size_t n2, bool is_forward) {
+vector_complex ComputeFFT::compute_recursion_fft(const vector_complex& _data, size_t n1, size_t n2, bool is_forward) {
     size_t n = _data.size();
     if (n != n1 * n2)
         throw std::runtime_error("error compute_recursion_fft arguments");
@@ -61,7 +61,7 @@ vector_complex compute_recursion_fft(const vector_complex& _data, size_t n1, siz
 }
 
 
-vector_complex compute_fft_slow(
+vector_complex ComputeFFT::compute_fft_slow(
     const vector_complex& _data,
     bool is_forward
 ) {
@@ -83,20 +83,20 @@ vector_complex compute_fft_slow(
     return result;
 }
 
-vector_complex forward_fft_slow(
+vector_complex ComputeFFT::forward_fft_slow(
     const vector_complex& _data
 ) {
     return compute_fft_slow(_data, true);
 }
 
 
-vector_complex normalized_backward_result(vector_complex _data) {
+vector_complex ComputeFFT::normalized_backward_result(vector_complex _data) {
     for (auto& x : _data)
         x /= _data.size();
     return _data;
 }
 
-vector_complex backward_fft_slow(
+vector_complex ComputeFFT::backward_fft_slow(
     const vector_complex& _data
 ) {
     return normalized_backward_result(compute_fft_slow(_data, false));
@@ -104,7 +104,7 @@ vector_complex backward_fft_slow(
 
 
 
-vector_complex roots_of_one(size_t n, bool is_forward) {
+vector_complex ComputeFFT::roots_of_one(size_t n, bool is_forward) {
     vector_complex roots;
     const double pi = 3.14159265358979323846;
 
@@ -116,11 +116,11 @@ vector_complex roots_of_one(size_t n, bool is_forward) {
     return roots;
 }
 
-vector_complex forward_fft(const vector_complex& _data) {
+vector_complex ComputeFFT::forward_fft(const vector_complex& _data) {
     return compute_recursion_fft(_data);
 }
 
-vector_complex backward_fft(const vector_complex& _data) {
+vector_complex ComputeFFT::backward_fft(const vector_complex& _data) {
     return normalized_backward_result(compute_recursion_fft(_data, false));
 }
 

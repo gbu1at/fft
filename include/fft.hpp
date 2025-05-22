@@ -8,23 +8,30 @@ namespace fft {
 
 using vector_complex = std::vector<std::complex<double>>;
 
+class ComputeFFT {
+public:
 
-vector_complex roots_of_one(size_t, bool=true);
+    ComputeFFT() = delete;
 
-vector_complex compute_fft_slow(const vector_complex&,bool=true);
+    static vector_complex forward_fft(const vector_complex&);
 
-vector_complex forward_fft(const vector_complex&);
+    static vector_complex backward_fft(const vector_complex&);
 
-vector_complex backward_fft(const vector_complex&);
+    static vector_complex forward_fft_slow(const vector_complex&);
 
-vector_complex forward_fft_slow(const vector_complex&);
+    static vector_complex backward_fft_slow(const vector_complex&);
 
-vector_complex backward_fft_slow(const vector_complex&);
+private:
 
-vector_complex compute_recursion_fft(const vector_complex&, size_t, size_t, bool=true);
+    static vector_complex roots_of_one(size_t, bool=true);
 
-vector_complex compute_recursion_fft(const vector_complex&, bool=true);
+    static vector_complex compute_fft_slow(const vector_complex&,bool=true);
 
-vector_complex normalized_backward_result(vector_complex&);
+    static vector_complex compute_recursion_fft(const vector_complex&, size_t, size_t, bool=true);
+
+    static vector_complex compute_recursion_fft(const vector_complex&, bool=true);
+
+    static vector_complex normalized_backward_result(vector_complex);
+};
 
 }
