@@ -3,7 +3,7 @@
 #include <complex>
 #include <vector>
 #include <cmath>
-#include "fft.hpp"
+#include "ComputeFFT.hpp"
 
 using vector_complex = std::vector<std::complex<double>>;
 

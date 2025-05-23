@@ -1,5 +1,5 @@
 CXXFLAGS = -O2 -Wall -Wextra -Werror -std=c++17 -I../include
-SRCS = ../src/fft.cpp test.cpp
+SRCS = ../src/ComputeFFT.cpp test.cpp
 OBJS = $(notdir $(SRCS:.cpp=.o))
 VPATH = ../src:.
 

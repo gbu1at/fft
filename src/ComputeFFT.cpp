@@ -1,5 +1,6 @@
-#include "fft.hpp"
+#include "ComputeFFT.hpp"
 #include <iostream>
+
 
 namespace fft
 {
@@ -106,6 +107,8 @@ vector_complex ComputeFFT::backward_fft_slow(
 
 vector_complex ComputeFFT::roots_of_one(size_t n, bool is_forward) {
     vector_complex roots;
+    roots.reserve(n);
+
     const double pi = 3.14159265358979323846;
 
     for (size_t i = 0; i < n; ++i) {

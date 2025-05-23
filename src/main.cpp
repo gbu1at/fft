@@ -1,13 +1,15 @@
-#include "fft.hpp"
+#include "ComputeFFT.hpp"
 #include <iostream>
 
 
 int main() {
-    fft::vector_complex arr;
 
     srand(time(0));
     
     int n = 3000000;
+
+    fft::vector_complex arr;
+    arr.reserve(n);
 
     std::cout << "array size: " << n << '\n';
 
@@ -15,7 +17,7 @@ int main() {
         double R = static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
         double I = static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
 
-        arr.push_back( {R, I} );
+        arr.push_back({R, I});
     }
 
     clock_t time_start_forward_fft = clock();
